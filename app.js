@@ -1,13 +1,22 @@
 const express = require('express');
 const fs = require('fs');
+const morgan = require('morgan');
+
 const app = express();
-//middleware
+//middlewares
+app.use(morgan('dev'));
 app.use(express.json());
 app.use((req, res, next) => {
   console.log('hello from the simple middleware');
 
   next();
 });
+
+app.use((req, res, next) => {
+  req.requestTime = new Date().toISOString();
+  next();
+});
+
 app.get('/', (req, res) => {
   res.status(200).json({
     status: 'success',
@@ -19,6 +28,7 @@ const homes = JSON.parse(fs.readFileSync(`${__dirname}/data/homes-basic.json`));
 
 const getAllHomes = (req, res) => {
   res.status(200).json({
+    requestedAt: req.requestTime,
     results: homes.length,
     status: 'success',
     data: {
