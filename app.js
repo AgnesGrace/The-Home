@@ -100,13 +100,50 @@ const deleteHome = (req, res) => {
     status: 'success',
   });
 };
-app.route('/api/v1/homes').get(getAllHomes).post(createHome);
-app
-  .route('/api/v1/homes/:id')
-  .get(getHome)
-  .patch(updateHome)
-  .delete(deleteHome);
 
+const getAllUsers = (req, res) => {
+  res.status(500).json({
+    status: 'error',
+    message: 'This route is not yet implemented',
+  });
+};
+
+const createUser = (req, res) => {
+  res.status(500).json({
+    status: 'error',
+    message: 'This route is not yet implemented',
+  });
+};
+
+const getUser = (req, res) => {
+  res.status(500).json({
+    status: 'error',
+    message: 'This route is not yet implemented',
+  });
+};
+
+const updateUser = (req, res) => {
+  res.status(500).json({
+    status: 'error',
+    message: 'This route is not yet implemented',
+  });
+};
+
+const deleteUser = (req, res) => {
+  res.status(500).json({
+    status: 'error',
+    message: 'This route is not yet implemented',
+  });
+};
+
+const homeRouter = express.Router();
+const userRouter = express.Router();
+
+homeRouter.route('/').get(getAllHomes).post(createHome);
+homeRouter.route('/:id').get(getHome).patch(updateHome).delete(deleteHome);
+
+userRouter.route('/').get(getAllUsers).post(createUser);
+userRouter.route('/:id').get(getUser).patch(updateUser).delete(deleteUser);
 // app.get('/api/v1/homes', getAllHomes);
 
 // app.get('/api/v1/homes/:id', getHome);
@@ -116,6 +153,8 @@ app
 // app.patch('/api/v1/homes/:id', updateHome);
 
 // app.delete('/api/v1/homes/:id', deleteHome);
+app.use('/api/v1/homes', homeRouter);
+app.use('/api/v1/users', userRouter);
 
 const port = 3001;
 app.listen(port, () => {
