@@ -40,7 +40,4 @@ app.get('/', (req, res) => {
 app.use('/api/v1/homes', homeRouter);
 app.use('/api/v1/users', userRouter);
 
-const port = 3001;
-app.listen(port, () => {
-  console.log(`App running on port ${port} `);
-});
+module.exports = app;

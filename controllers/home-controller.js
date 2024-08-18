@@ -4,6 +4,28 @@ const homes = JSON.parse(
   fs.readFileSync(`${__dirname}/../data/homes-basic.json`)
 );
 
+exports.checkRequestBody = (req, res, next) => {
+  if (!req.body.name || !req.body.visitDuration) {
+    res.status(400).json({
+      status: 'fail',
+      message: 'Missing home name and visit duration',
+    });
+  }
+
+  next();
+};
+
+exports.checkParamId = (req, res, next, val) => {
+  console.log(`Home id is ${val}`);
+  if (req.params.id * 1 > homes.length) {
+    return res.status(404).json({
+      status: 'fail',
+      message: 'Invalid home id',
+    });
+  }
+  next();
+};
+
 exports.getAllHomes = (req, res) => {
   res.status(200).json({
     requestedAt: req.requestTime,
@@ -18,11 +40,7 @@ exports.getAllHomes = (req, res) => {
 exports.getHome = (req, res) => {
   const id = +req.params.id;
   const home = homes.find((home) => home.id === id);
-  if (!home)
-    res.status(404).json({
-      status: 'failed',
-      message: 'Home not found!',
-    });
+
   res.status(200).json({
     status: 'success',
     data: {
@@ -53,11 +71,6 @@ exports.updateHome = (req, res) => {
   const id = +req.params.id;
   const home = homes.find((home) => home.id === id);
 
-  if (!home)
-    res.status(404).json({
-      status: 'failed',
-      message: 'Home not found!',
-    });
   res.status(200).json({
     status: 'success',
     data: {
@@ -70,11 +83,6 @@ exports.deleteHome = (req, res) => {
   const id = +req.params.id;
   const home = homes.find((home) => home.id === id);
 
-  if (!home)
-    res.status(404).json({
-      status: 'failed',
-      message: 'Home not found!',
-    });
   res.status(204).json({
     status: 'success',
   });
