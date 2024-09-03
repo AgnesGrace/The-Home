@@ -1,8 +1,7 @@
 [
   {
-    "id": 1,
     "name": "Adventure Trek",
-    "visitDuration": "4 hours",
+    "visitDuration": 4,
     "maxGroupSize": 15,
     "journeyDifficultyLevel": "Moderate",
     "ratings": [4, 5, 3, 4, 5],
@@ -23,15 +22,15 @@
     ]
   },
   {
-    "id": 2,
     "name": "Mountain Expedition",
-    "visitDuration": "8 hours",
+    "visitDuration": 8,
     "maxGroupSize": 10,
     "journeyDifficultyLevel": "Challenging",
     "ratings": [5, 5, 4, 4, 4],
     "ratingsAverage": 4.4,
     "ratingsQuantity": 5,
     "amount": 250,
+    "discount": 50,
     "summary": "A challenging expedition to the mountain summit.",
     "description": "This expedition is not for the faint-hearted. It requires stamina and determination as you climb to the summit, but the view from the top is worth every step.",
     "bgImage": "https://images.unsplash.com/photo-1602003299000-8437f7e52022",
@@ -46,15 +45,15 @@
     ]
   },
   {
-    "id": 3,
     "name": "Forest Walk",
-    "visitDuration": "3 hours",
+    "visitDuration": 3,
     "maxGroupSize": 20,
     "journeyDifficultyLevel": "Easy",
     "ratings": [3, 4, 4, 3, 4],
     "ratingsAverage": 3.6,
     "ratingsQuantity": 5,
     "amount": 80,
+    "discount": 50,
     "summary": "A peaceful walk through the forest.",
     "description": "Take a peaceful walk through the forest, enjoying the fresh air and the sounds of nature. This experience is perfect for those who want to relax and unwind.",
     "bgImage": "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0",
@@ -69,15 +68,15 @@
     ]
   },
   {
-    "id": 4,
     "name": "Desert Safari",
-    "visitDuration": "6 hours",
+    "visitDuration": 6,
     "maxGroupSize": 12,
     "journeyDifficultyLevel": "Moderate",
     "ratings": [4, 4, 5, 4, 5],
     "ratingsAverage": 4.4,
     "ratingsQuantity": 5,
     "amount": 180,
+    "discount": 50,
     "summary": "An exhilarating safari in the desert.",
     "description": "Experience the thrill of a desert safari. This journey takes you through the vast dunes, with opportunities to witness the beauty of the desert at sunset.",
     "bgImage": "https://images.unsplash.com/photo-1551782450-a2132b4ba21d",
@@ -92,15 +91,15 @@
     ]
   },
   {
-    "id": 5,
     "name": "Beach Retreat",
-    "visitDuration": "5 hours",
+    "visitDuration": 5,
     "maxGroupSize": 18,
     "journeyDifficultyLevel": "Easy",
     "ratings": [5, 4, 4, 5, 5],
     "ratingsAverage": 4.6,
     "ratingsQuantity": 5,
     "amount": 120,
+    "discount": 50,
     "summary": "A relaxing retreat on the beach.",
     "description": "Spend a day on the beach, soaking up the sun and enjoying the ocean breeze. This retreat is perfect for those looking to relax and rejuvenate.",
     "bgImage": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e",
@@ -113,11 +112,5 @@
       "2024-10-01T10:00:00Z",
       "2024-10-20T10:00:00Z"
     ]
-  },
-  {
-    "id": 6,
-    "name": "The main Home",
-    "visitDuration": 5,
-    "journeyDifficultyLevel": "difficult"
   }
 ]

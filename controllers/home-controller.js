@@ -28,7 +28,16 @@ const Home = require('../models/homeModel');
 
 exports.getAllHomes = async (req, res) => {
   try {
-    const homes = await Home.find();
+    //Build the query first
+    const queryObj = { ...req.query };
+    const excludedQueryFields = ['fields', 'page', 'limit', 'sort'];
+    excludedQueryFields.forEach((queryEl) => delete queryObj[queryEl]);
+    console.log(queryObj);
+    const query = Home.find(queryObj);
+
+    // Execute the query
+    const homes = await query;
+
     res.status(200).json({
       requestedAt: req.requestTime,
       results: homes.length,
