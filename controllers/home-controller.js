@@ -30,11 +30,34 @@ exports.getAllHomes = async (req, res) => {
   try {
     //Build the query first
     const queryObj = { ...req.query };
+    //filtering
     const excludedQueryFields = ['fields', 'page', 'limit', 'sort'];
     excludedQueryFields.forEach((queryEl) => delete queryObj[queryEl]);
-    console.log(queryObj);
-    const query = Home.find(queryObj);
 
+    const queryString = JSON.stringify(queryObj).replace(
+      /\b(lt|lte|gt|gte)\b/g,
+      (match) => `$${match}`,
+    );
+
+    const formattedQueryObj = JSON.parse(queryString);
+    let query = Home.find(formattedQueryObj);
+
+    //sorting
+    if (req.query.sort) {
+      const sortBy = req.query.sort.split(',').join(' ');
+      console.log(sortBy);
+      query = query.sort(sortBy);
+    } else {
+      query = query.sort('-createdAt');
+    }
+
+    //Limiting the fields
+    if (req.query.fields) {
+      const fields = req.query.fields.split(',').join(' ');
+      query = query.select(fields);
+    } else {
+      query = query.select('-__v');
+    }
     // Execute the query
     const homes = await query;
 
