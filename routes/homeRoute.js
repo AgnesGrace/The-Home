@@ -4,7 +4,7 @@ const homeController = require('../controllers/home-controller');
 const router = express.Router();
 //Middleware for id param
 // router.param('id', homeController.checkParamId);
-
+router.route('/home-stats').get(homeController.getHomesStats);
 router
   .route('/')
   .get(homeController.getAllHomes)

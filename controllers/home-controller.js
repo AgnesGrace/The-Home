@@ -97,3 +97,32 @@ exports.deleteHome = async (req, res) => {
     });
   }
 };
+
+exports.getHomesStats = async (_, res) => {
+  try {
+    const stats = await Home.aggregate([
+      {
+        $match: { ratingsAverage: { $lte: 4.5 } },
+      },
+      {
+        $group: {
+          _id: '$journeyDifficultyLevel',
+          num: { $sum: 1 },
+          numRatings: { $sum: '$ratingsQuantity' },
+          avgRating: { $avg: '$ratingsAverage' },
+          avgAmount: { $avg: '$amount' },
+          maxAmount: { $max: '$amount' },
+        },
+      },
+    ]);
+    res.status(200).json({
+      status: 'success',
+      data: stats,
+    });
+  } catch (error) {
+    res.status(400).json({
+      status: 'fail',
+      message: error,
+    });
+  }
+};
