@@ -106,13 +106,16 @@ exports.getHomesStats = async (_, res) => {
       },
       {
         $group: {
-          _id: '$journeyDifficultyLevel',
+          _id: { $toUpper: '$journeyDifficultyLevel' },
           num: { $sum: 1 },
           numRatings: { $sum: '$ratingsQuantity' },
           avgRating: { $avg: '$ratingsAverage' },
           avgAmount: { $avg: '$amount' },
           maxAmount: { $max: '$amount' },
         },
+      },
+      {
+        $sort: { avgRating: 1 },
       },
     ]);
     res.status(200).json({

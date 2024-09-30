@@ -6,6 +6,7 @@ const userRouter = require('./routes/userRoute');
 
 const app = express();
 //middlewares
+
 app.use(morgan('dev'));
 app.use(express.json());
 app.use((req, res, next) => {
@@ -40,5 +41,27 @@ app.get('/', (req, res) => {
 //Mount routers
 app.use('/api/v1/homes', homeRouter);
 app.use('/api/v1/users', userRouter);
+
+app.all('*', (req, res, next) => {
+  const err = new Error(`Cannot find ${req.originalUrl} on the Home server.`);
+  err.status = 'fail';
+  err.statusCode = 404;
+  // res.status(404).json({
+  //   status: 'fail',
+  //   message: `Cannot find ${req.originalUrl} on the Home server.`,
+  // });
+
+  next(err);
+});
+
+app.use((err, _, res, next) => {
+  err.statusCode = err.statusCode || 500;
+  err.status = err.status || 'error';
+
+  res.status(err.statusCode).json({
+    status: err.status,
+    message: err.message,
+  });
+});
 
 module.exports = app;
